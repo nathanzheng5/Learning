@@ -1,0 +1,17 @@
+import os
+import sys
+
+sys.path.append('../')
+from Common import configureEnvironmentForJava
+
+if 'C:/MinGW/mingw32/bin' not in os.environ['PATH']:
+    os.environ['PATH'] = 'C:/MinGW/mingw32/bin;' + os.environ['PATH']
+env = Environment( tools = ['javac', 'jar'] )
+
+configureEnvironmentForJava(env)
+
+classes = env.Java('classes', 'src')
+installTarget = env.Install('export', classes)
+env.Alias('install', installTarget)
+
+env.Alias('doNothing', [])

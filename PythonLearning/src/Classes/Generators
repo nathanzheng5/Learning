@@ -1,0 +1,35 @@
+# powerful tool to create iterators
+# use yield whenever they want to return data
+# each time next() is called on it, the generator resumes where it lefts off
+
+def reverse(data):
+    for index in range(len(data)-1, -1, -1):
+        yield data[index]
+
+# __iter__() and next() methods are created automatically
+# local variables and execution state are automatically saved between calls (so you don't have to use self.index and self.data to track them)
+# when generator terminate, they automatically raise StopIteration
+
+for char in reverse('golf'):
+    print char
+
+for i in reverse(range(1, 10, 1)):
+    print i
+
+reverseIt = reverse(range(1, 10, 1)).__iter__()
+print 'reverseIt.next()', reverseIt.next()
+print 'reverseIt.next()', reverseIt.next()
+print 'reverseIt.next()', reverseIt.next()
+
+# generator expressions
+print sum(i*i for i in range(10)) # sum of squares
+
+xvec = [10, 20, 30]
+yvec = [7, 5, 3]
+print sum(x * y for x, y in zip(xvec, yvec))    # dot product
+
+from math import pi, sin
+sineTable = dict((x, sin(x * pi / 180)) for x in range(0, 91))
+
+data = 'golf'
+print list(data[i] for i in range(len(data)-1, -1, -1))

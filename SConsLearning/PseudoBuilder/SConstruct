@@ -1,0 +1,30 @@
+import os
+import sys
+
+sys.path.append('../')
+from Common import configureEnvironmentForJava
+
+def install_in_two_dirs(env, source):
+    i1 = env.Install('install1', source)
+    i2 = env.Install('install2', source)
+    return [i1[0], i2[0]]
+
+def buildTestProg(env, testfile, testdir='tests'):
+    srcfile = 'test_%s.c' % testfile
+    targetFolder = '%s/targetPrefix_%s' % (testdir, testfile)
+    p = env.Install(targetFolder, srcfile)
+    return p
+
+if 'C:/MinGW/mingw32/bin' not in os.environ['PATH']:
+    os.environ['PATH'] = 'C:/MinGW/mingw32/bin;' + os.environ['PATH']
+env = Environment( tools = ['javac', 'jar'] )
+
+configureEnvironmentForJava(env)
+
+env.AddMethod(install_in_two_dirs, "InstallInTwoDirs")
+env.InstallInTwoDirs(env.Java('classes', 'src'))
+
+env.AddMethod(buildTestProg, 'BuildTestProg')
+testprog = env.BuildTestProg('MyTest')
+env.Alias('testProg', testprog)
+
