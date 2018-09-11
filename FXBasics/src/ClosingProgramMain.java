@@ -25,7 +25,7 @@ public class ClosingProgramMain extends Application {
             closeProgram();
         });
 
-        button = new Button("Close Program button 2");
+        button = new Button("Close Program button");
         button.setOnAction(event -> closeProgram());
 
         StackPane layout = new StackPane();
