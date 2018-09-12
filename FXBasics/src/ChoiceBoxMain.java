@@ -32,6 +32,10 @@ public class ChoiceBoxMain extends Application {
         // set initial value
         choiceBox.setValue("Apples");
 
+        // listening for selection changes
+        choiceBox.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> System.out.println("choice changed from " + oldValue + " to " + newValue));
+
         button.setOnAction(e -> getChoice(choiceBox));
 
         VBox layout = new VBox(10);
