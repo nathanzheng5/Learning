@@ -1,9 +1,11 @@
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -15,6 +17,7 @@ public class TableViewMain extends Application {
     Scene scene;
     Button button;
     TableView<Product> table;
+    TextField nameInput, priceInput, quantityInput;
 
     public static void main(String[] args) {
         launch(args);
@@ -42,15 +45,59 @@ public class TableViewMain extends Application {
 
         // put columns to table
         table = new TableView<>();
+        // set table data
         table.setItems(getProducts());
         table.getColumns().addAll(nameCol, priceCol, quantityCol);
+        table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        // text fields
+        nameInput = new TextField();
+        nameInput.setPromptText("Name");
+        nameInput.setMinWidth(100);
+
+        priceInput = new TextField();
+        priceInput.setPromptText("Price");
+        priceInput.setMinWidth(100);
+
+        quantityInput = new TextField();
+        quantityInput.setPromptText("Quantity");
+        quantityInput.setMinWidth(100);
+
+        // button
+        Button addButton = new Button("Add");
+        addButton.setOnAction(e -> addButtonClicked());
+        Button deleteButton = new Button("Delete");
+        deleteButton.setOnAction(e -> deleteButtonClicked());
+
+        HBox hBox = new HBox();
+        hBox.setPadding(new Insets(10, 10, 10, 10));
+        hBox.setSpacing(10);
+        hBox.getChildren().addAll(nameInput, priceInput, quantityInput, addButton, deleteButton);
 
         VBox layout = new VBox();
-        layout.getChildren().add(table);
+        layout.getChildren().addAll(table, hBox);
 
         scene = new Scene(layout);
         window.setScene(scene);
         window.show();
+    }
+
+    private void addButtonClicked() {
+        Product product = new Product();
+        product.setName(nameInput.getText());
+        product.setPrice(Double.parseDouble(priceInput.getText()));
+        product.setQuantity(Integer.parseInt(quantityInput.getText()));
+        table.getItems().add(product);
+
+        nameInput.clear();
+        priceInput.clear();
+        quantityInput.clear();
+    }
+
+    private void deleteButtonClicked() {
+        ObservableList<Product> allItems = table.getItems();
+        ObservableList<Product> selectedItems = table.getSelectionModel().getSelectedItems();
+        selectedItems.forEach(allItems::remove);
     }
 
     public ObservableList<Product> getProducts() {
