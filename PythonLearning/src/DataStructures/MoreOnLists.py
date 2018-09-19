@@ -3,59 +3,66 @@ __author__ = 'nzheng'
 a = [66.25, 333, 333, 1, 1234.5]
 
 # count(x) returns the number of time x appears in the list
-print a.count(333), a.count(66.25), a.count('x')
+print(a.count(333), a.count(66.25), a.count('x'))
 
 a.insert(2, -1)  # adds -1 to index 2
 a.append(333)  # adds 333 to the end
-print a
+print(a)
 
-print 'index of 333 is', a.index(333)  # index(x) returns the index of the FIRST found x in the list
+print('index of 333 is', a.index(333))  # index(x) returns the index of the FIRST found x in the list
 a.remove(333)  # removes the first found 333 in the list
-print 'after removing 333:', a
+print('after removing 333:', a)
 
 a.reverse()
-print 'after reverse:', a
+print('after reverse:', a)
 
 a.sort()
-print 'after sort:', a
+print('after sort:', a)
 
-print 'pop the last item in the list', a.pop()
-print 'after pop list is:', a
-print 'pop index 1 in the list', a.pop(1)
-print 'after pop list is:', a
+print('pop the last item in the list', a.pop())
+print('after pop list is:', a)
+print('pop index 1 in the list', a.pop(1))
+print('after pop list is:', a)
 
 # using list as stack (LIFO)
 stack = [3, 4, 5]
-print stack
+print(stack)
 stack.append(6)
 stack.append(7)
-print stack
-print 'stack pop', stack.pop()
+print(stack)
+print('stack pop', stack.pop())
 
 # using list as queue (FIFO - using collections.deque)
 from collections import deque
 
 queue = deque(['Eric', 'John', 'Michael'])
-print queue
+print(queue)
 queue.append('Terry')
 queue.append('Graham')
-print queue
-print queue.popleft()
-print queue
+print(queue)
+print(queue.popleft())
+print(queue)
 
 # Functional Programming Tools
 # filter(fcn, sequence): returns a list from sequence that satisfies fcn
 def divisibleBy3Or5(x): return x % 3 == 0 or x % 5 == 0
-print filter(divisibleBy3Or5, range(2, 15)) # note range(a, b) does not include b
+
+
+print(filter(divisibleBy3Or5, range(2, 15)))  # note range(a, b) does not include b
 
 # map(fcn, sequence): calls fcn(i) for each i in sequence and returns a list of result values
 def cube(x): return x * x * x
-print map(cube, range(1, 11))
+
+
+print(map(cube, range(1, 11)))
 
 # reduce(fcn, sequence): returns a single value by calling binary function fcn on (the first 2 items in the sequence),
 # then on (the result and the next item)
 def add(a, b): return a+b;
-print reduce(add, range(1, 10))
+
+
+print(reduce(add, range(1, 10)))
+
 
 def mySum(seq):
     def myAdd(a, b): return a+b
@@ -66,16 +73,16 @@ print(mySum([]))
 # list comprehensions
 squares = []
 for x in range(10): squares.append(x ** 2)
-print squares
+print(squares)
 # is equivalent to:
 squares = map(lambda x: x ** 2, range(10))
-print squares
+print(squares)
 # is equivalent to:
 squares = [x ** 2 for x in range(10)]
-print squares
+print(squares)
 
 points = [(x, y) for x in [1, 2, 3] for y in [1, 2, 3] if x != y]
-print points
+print(points)
 
 vec = [-4, -2, 0, 2, 4]
 print [x*2 for x in vec] # do something to each element in vec
