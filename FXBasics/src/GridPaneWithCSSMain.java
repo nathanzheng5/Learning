@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class GridPaneMain extends Application {
+public class GridPaneWithCSSMain extends Application {
 
     Stage window;
 
@@ -28,7 +28,10 @@ public class GridPaneMain extends Application {
         grid.setHgap(10);
 
         Label nameLabel = new Label("User name:");
+        nameLabel.setId("bold-label");
         GridPane.setConstraints(nameLabel, 0, 0);
+        // inline style
+//        nameLabel.setStyle("-fx-text-fill: #e8e8e8");
 
         TextField nameInput = new TextField("nzheng");
         GridPane.setConstraints(nameInput, 1, 0);
@@ -42,10 +45,16 @@ public class GridPaneMain extends Application {
 
         Button loginButton = new Button("Login");
         GridPane.setConstraints(loginButton, 1, 2);
+        loginButton.setOnAction(e -> System.out.println("Logging in!"));
 
-        grid.getChildren().addAll(nameLabel, nameInput, pwLabel, passwordField, loginButton);
+        Button signUpButton = new Button("Sign up");
+        signUpButton.getStyleClass().add("button-blue");
+        GridPane.setConstraints(signUpButton, 1, 3);
+
+        grid.getChildren().addAll(nameLabel, nameInput, pwLabel, passwordField, loginButton, signUpButton);
 
         Scene scene = new Scene(grid, 300, 200);
+        scene.getStylesheets().add("Viper.css");
         window.setScene(scene);
 
         window.show();
