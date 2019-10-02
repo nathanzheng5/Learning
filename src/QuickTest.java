@@ -1,40 +1,52 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.ParsePosition;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class QuickTest {
 
-    public static void main(String[] args) {
-        final LocalDate now = LocalDate.now();
-        System.out.println(now);
+    public static void main(String[] args) throws ParseException {
+        JFrame frame = new JFrame();
+        JPanel panel = new JPanel();
+        frame.setSize(800, 600);
 
-        final int dayOfMonth = now.getDayOfMonth();
-        System.out.println("Day of month = " + dayOfMonth);
+        JScrollPane scrollPane = new JScrollPane();
+        panel.add(scrollPane);
 
-        final LocalDate beginningOfMonth = now.withDayOfMonth(1);
-        System.out.println("Beginning = " + beginningOfMonth);
+        JPanel child = new JPanel();
+        child.setBorder(BorderFactory.createLineBorder(Color.RED));
+        child.setLayout(new BoxLayout(child, BoxLayout.PAGE_AXIS));
+        child.add(new JLabel("hello"));
+        child.add(new JLabel("world"));
+        JPanel child2 = new JPanel();
+        child2.setBorder(BorderFactory.createLineBorder(Color.RED));
+        child2.setLayout(new BoxLayout(child2, BoxLayout.PAGE_AXIS));
+        child2.add(new JLabel("hello"));
+        child2.add(new JLabel("world2"));
+//        scrollPane.add(child);
 
-        final LocalDate endOfMonth = now.withDayOfMonth(now.lengthOfMonth());
-        System.out.println("End of month = " + endOfMonth);
+        frame.setContentPane(panel);
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        scrollPane.getViewport().add(child);
+        scrollPane.getViewport().add(child2);
 
-        final DayOfWeek dayOfWeek = now.getDayOfWeek();
-        System.out.println("Day of week " + dayOfWeek);
-
-        TemporalField fieldHere = WeekFields.of(Locale.CANADA).dayOfWeek();
-        final LocalDate beginningOfWeek = now.with(fieldHere, 1);
-        System.out.println("Beginning of week " + beginningOfWeek);
-        final LocalDate endOfWeek = now.with(fieldHere, 7);
-        System.out.println("End of week " + endOfWeek);
-
-        final LocalDate date = LocalDate.of(2018, 3, 30);
-        final LocalDate localDate = date.minusMonths(1);
-        System.out.println(localDate);
+//        frame.pack();
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
+
+
 
 }

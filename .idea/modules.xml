@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/Py4j/Py4j.iml" filepath="$PROJECT_DIR$/Py4j/Py4j.iml" />
       <module fileurl="file://$PROJECT_DIR$/PythonLearning/PythonLearning.iml" filepath="$PROJECT_DIR$/PythonLearning/PythonLearning.iml" />
       <module fileurl="file://$PROJECT_DIR$/SConsLearning/SConsLearning.iml" filepath="$PROJECT_DIR$/SConsLearning/SConsLearning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SwingLearning/SwingLearning.iml" filepath="$PROJECT_DIR$/SwingLearning/SwingLearning.iml" />
     </modules>
   </component>
 </project>

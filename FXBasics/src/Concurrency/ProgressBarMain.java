@@ -5,10 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
@@ -55,6 +52,13 @@ public class ProgressBarMain extends Application {
                     updateMessage(i * 100.0 / max + "%");
                 }
                 return null;
+            }
+
+            @Override
+            protected void succeeded() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("All Done!");
+                alert.showAndWait();
             }
         };
 
