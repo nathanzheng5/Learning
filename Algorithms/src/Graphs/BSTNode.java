@@ -1,17 +1,12 @@
 package Graphs;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BSTNode {
-
-    public final int value;
-    public BSTNode left;
-    public BSTNode right;
+public class BSTNode extends BTNode {
 
     public BSTNode(int value) {
-        this.value = value;
+        super(value);
     }
 
     public void insert(int value) {
