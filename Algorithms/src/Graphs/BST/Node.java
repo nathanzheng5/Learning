@@ -1,24 +1,27 @@
-package Graphs;
+package Graphs.BST;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BSTNode extends BTNode {
+class Node {
+    public final int value;
+    public Node left;
+    public Node right;
 
-    public BSTNode(int value) {
-        super(value);
+    public Node(int value) {
+        this.value = value;
     }
 
     public void insert(int value) {
         if (value < this.value) {
             if (left == null) {
-                left = new BSTNode(value);
+                left = new Node(value);
             } else {
                 left.insert(value);
             }
         } else {
             if (right == null) {
-                right = new BSTNode(value);
+                right = new Node(value);
             } else {
                 right.insert(value);
             }
@@ -36,7 +39,7 @@ public class BSTNode extends BTNode {
     }
 
     public int minValue() {
-        BSTNode current = this;
+        Node current = this;
         while (current.left != null) {
             current = current.left;
         }
@@ -44,7 +47,7 @@ public class BSTNode extends BTNode {
     }
 
     public int maxValue() {
-        BSTNode current = this;
+        Node current = this;
         while (current.right != null) {
             current = current.right;
         }
@@ -69,7 +72,7 @@ public class BSTNode extends BTNode {
         }
     }
 
-    public BSTNode LCA(int n1, int n2) {
+    public Node LCA(int n1, int n2) {
         if (value > n1 && value > n2) {
             return left != null ? left.LCA(n1, n2) : null;
         }
@@ -79,24 +82,24 @@ public class BSTNode extends BTNode {
         return this;
     }
 
-    public BSTNode convertToBalanced() {
-        List<BSTNode> orderedNodes = new ArrayList<>();
+    public Node convertToBalanced() {
+        List<Node> orderedNodes = new ArrayList<>();
         collectNodes(orderedNodes);
         return build(orderedNodes, 0, orderedNodes.size() - 1);
     }
 
-    private BSTNode build(List<BSTNode> list, int startI, int endI) {
+    private Node build(List<Node> list, int startI, int endI) {
         if (startI > endI) {
             return null;
         }
         int midI = (startI + endI) / 2;
-        BSTNode root = list.get(midI);
+        Node root = list.get(midI);
         root.left = build(list, startI, midI - 1);
         root.right = build(list, midI + 1, endI);
         return root;
     }
 
-    private void collectNodes(List<BSTNode> list) {
+    private void collectNodes(List<Node> list) {
         if (left != null) {
             left.collectNodes(list);
         }

@@ -1,6 +1,5 @@
-package Graphs;
+package Graphs.BST;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,7 +8,7 @@ public class BSTTest {
 
     @Test
     public void test() {
-        BSTNode root = new BSTNode(10);
+        Node root = new Node(10);
         root.insert(5);
         root.insert(20);
         root.insert(3);
@@ -37,15 +36,15 @@ public class BSTTest {
 
     @Test
     public void testBalance() {
-        BSTNode root = new BSTNode(4);
-        root.left = new BSTNode(3);
-        root.left.left = new BSTNode(2);
-        root.left.left.left = new BSTNode(1);
-        root.right = new BSTNode(5);
-        root.right.right = new BSTNode(6);
-        root.right.right.right = new BSTNode(7);
+        Node root = new Node(4);
+        root.left = new Node(3);
+        root.left.left = new Node(2);
+        root.left.left.left = new Node(1);
+        root.right = new Node(5);
+        root.right.right = new Node(6);
+        root.right.right.right = new Node(7);
 
-        BSTNode balanceRoot = root.convertToBalanced();
+        Node balanceRoot = root.convertToBalanced();
         assertEquals(4, balanceRoot.value);
         assertEquals(2, balanceRoot.left.value);
         assertEquals(1, balanceRoot.left.left.value);
