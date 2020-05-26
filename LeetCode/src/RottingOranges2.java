@@ -18,23 +18,23 @@ public class RottingOranges2 {
         int minutes = 0;
         while (!fresh.isEmpty()) {
 
-            Set<Coordinate> infected = new HashSet<>();
+            Set<Coordinate> newRotten = new HashSet<>();
             rotten.forEach(rottenOrange -> {
                 Coordinate neighbor = new Coordinate(rottenOrange.row - 1, rottenOrange.col);
-                infect(neighbor, fresh, infected);
+                infect(neighbor, fresh, newRotten);
                 neighbor = new Coordinate(rottenOrange.row + 1, rottenOrange.col);
-                infect(neighbor, fresh, infected);
+                infect(neighbor, fresh, newRotten);
                 neighbor = new Coordinate(rottenOrange.row, rottenOrange.col - 1);
-                infect(neighbor, fresh, infected);
+                infect(neighbor, fresh, newRotten);
                 neighbor = new Coordinate(rottenOrange.row, rottenOrange.col + 1);
-                infect(neighbor, fresh, infected);
+                infect(neighbor, fresh, newRotten);
             });
 
-            if (infected.isEmpty()) {
+            if (newRotten.isEmpty()) {
                 return -1;
             }
 
-            rotten = infected;
+            rotten = newRotten;
             minutes++;
         }
         return minutes;
