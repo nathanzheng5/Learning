@@ -28,12 +28,18 @@ public class SectionCount {
         System.out.println("Node " + node.value + " section = " + section);
 
         for (int i = 0; i < node.children.size(); i++) {
+            // create a new level for the first child
             if (i == 0) {
                 stack.push(1);
+
+            // increment the value in the same level
             } else {
                 stack.push(stack.pop() + 1);
             }
+
             dfsAndPrintSection(node.children.get(i), stack);
+
+            // retract the level after the last child is visited
             if (i == node.children.size() - 1) {
                 stack.pop();
             }
