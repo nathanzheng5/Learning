@@ -144,16 +144,36 @@ public class RottingOranges {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Coordinate that = (Coordinate) o;
-            return i == that.i &&
-                    j == that.j;
+            if (this == o) {
+                return true;
+            }
+            if (o instanceof Coordinate) {
+                Coordinate that = (Coordinate) o;
+                return this.i == that.i && this.j == that.j;
+            }
+            return false;
         }
 
         @Override
         public int hashCode() {
             return Objects.hash(i, j);
+        }
+
+        List<Coordinate> getNeighbors(int MAX_I, int MAX_J) {
+            List<Coordinate> retVal = new ArrayList<>();
+            if (i - 1 >= 0) {
+                retVal.add(new Coordinate(i - 1, j));
+            }
+            if (i + 1 <= MAX_I) {
+                retVal.add(new Coordinate(i + 1, j));
+            }
+            if (j - 1 >= 0) {
+                retVal.add(new Coordinate(i, j - 1));
+            }
+            if (j + 1 < MAX_J) {
+                retVal.add(new Coordinate(i, j + 1));
+            }
+            return retVal;
         }
     }
 
